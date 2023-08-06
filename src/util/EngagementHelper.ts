@@ -1,7 +1,43 @@
-import * as Highcharts from "highcharts";
+import { MessageCountType } from "./MessageCountList.ts";
+
+const getData = (
+  messageCountList: MessageCountType[],
+  channels: object[],
+): Array<object> => {
+  const data: Array<object> = [];
+  let fillterdList: object[] = [];
+
+  channels.map((item: object) => {
+    const channelId = item.id;
+    const fillterd = messageCountList.filter((countItem) => {
+      return countItem.channelId === channelId;
+    });
+
+    if (fillterd.length > 1) {
+      fillterdList = fillterd.map((obj) => ({ ...obj, name: item.name }));
+    }
+  });
+
+  console.log("fillterd list: ", fillterdList);
+
+  if (fillterdList.length != 0) {
+    fillterdList.map((item: object) => {
+      const timestamp = new Date(item.timeBucket).getTime();
+      data.push({ y: parseInt(item.count), x: timestamp, name: item.name });
+    });
+  }
+
+  console.log("data point", data);
+  return data;
+};
 
 export const engagementHelper = {
-  engagementMessageOverTimeChartOptions: (messageCountList, channels) => {
+  engagementMessageOverTimeChartOptions: (
+    messageCountList: MessageCountType[],
+    channels: object[],
+  ) => {
+    const data = getData(messageCountList, channels);
+
     const config = {
       title: {
         text: "",
@@ -21,6 +57,10 @@ export const engagementHelper = {
         borderColor: "#2aa9ad",
         borderRadius: 2,
         borderWidth: 2,
+
+        style: {
+          color: "#FFFFFF",
+        },
       },
 
       yAxis: {
@@ -34,16 +74,15 @@ export const engagementHelper = {
 
       xAxis: {
         type: "datetime",
-        labels: {
-          formatter: function () {
-            return Highcharts.dateFormat("%e %b", this.value);
-          },
+        dateTimeLabelFormats: {
+          day: "%e. %b",
         },
+        tickInterval: 24 * 3600 * 1000,
         plotLines: [
           {
             color: "gray",
             dashStyle: "solid",
-            value: 5.5,
+            value: 7.5,
             width: 2,
           },
         ],
@@ -66,10 +105,7 @@ export const engagementHelper = {
           },
           lineWidth: 4,
           color: "#145959",
-          data: [
-            4, 71.5, 106.4, 129.2, 144.0, 176.0, 135.6, 148.5, 216.4, 194.1,
-            95.6, 54.4,
-          ],
+          data: data,
         },
       ],
     };

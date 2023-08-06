@@ -1,4 +1,4 @@
-import { getData } from "./Data.ts";
+import { getData, getXAxisMid } from "./Data.ts";
 import { MessageCountType } from "./MessageCountList.ts";
 
 export const engagementHelper = {
@@ -7,6 +7,7 @@ export const engagementHelper = {
     channels: object[],
   ) => {
     const data = getData(messageCountList, channels);
+    const plotXAxisMid = getXAxisMid(data);
 
     const config = {
       title: {
@@ -60,7 +61,7 @@ export const engagementHelper = {
           {
             color: "gray",
             dashStyle: "solid",
-            value: 7.5,
+            value: plotXAxisMid,
             width: 2,
           },
         ],

@@ -30,3 +30,18 @@ export const getData = (
   //   console.log("data point", data);
   return data;
 };
+
+export const getXAxisMid = (data: Array<object>) => {
+  const min = data.reduce((prev, current) => {
+    return prev.x < current.x ? prev : current;
+  });
+
+  const max = data.reduce((prev, current) => {
+    return prev.x > current.x ? prev : current;
+  });
+
+  const mid = new Date((min.x + max.x) / 2);
+  //   console.log(mid.toISOString());
+
+  return mid;
+};

@@ -1,8 +1,8 @@
 import * as Highcharts from "highcharts";
-import HighchartsReact from "highcharts-react-official";
 import { engagementHelper } from "../util/EngagementHelper.ts";
 import { MessageCountList } from "../util/MessageCountList.ts";
 import { Channels } from "../util/Channels.ts";
+import { HighchartsReact } from "highcharts-react-official";
 
 function EngagementMessagesOverTime() {
   const options = engagementHelper.engagementMessageOverTimeChartOptions(

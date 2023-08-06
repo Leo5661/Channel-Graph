@@ -31,7 +31,7 @@ export const getData = (
   return data;
 };
 
-export const getXAxisMid = (data: Array<object>) => {
+export const getXAxisMid = (data: Array<any>) => {
   const min = data.reduce((prev, current) => {
     return prev.x < current.x ? prev : current;
   });

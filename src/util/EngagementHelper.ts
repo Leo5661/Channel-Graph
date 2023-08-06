@@ -1,35 +1,5 @@
+import { getData } from "./Data.ts";
 import { MessageCountType } from "./MessageCountList.ts";
-
-const getData = (
-  messageCountList: MessageCountType[],
-  channels: object[],
-): Array<object> => {
-  const data: Array<object> = [];
-  let fillterdList: object[] = [];
-
-  channels.map((item: object) => {
-    const channelId = item.id;
-    const fillterd = messageCountList.filter((countItem) => {
-      return countItem.channelId === channelId;
-    });
-
-    if (fillterd.length > 1) {
-      fillterdList = fillterd.map((obj) => ({ ...obj, name: item.name }));
-    }
-  });
-
-  console.log("fillterd list: ", fillterdList);
-
-  if (fillterdList.length != 0) {
-    fillterdList.map((item: object) => {
-      const timestamp = new Date(item.timeBucket).getTime();
-      data.push({ y: parseInt(item.count), x: timestamp, name: item.name });
-    });
-  }
-
-  console.log("data point", data);
-  return data;
-};
 
 export const engagementHelper = {
   engagementMessageOverTimeChartOptions: (
@@ -57,7 +27,8 @@ export const engagementHelper = {
         borderColor: "#2aa9ad",
         borderRadius: 2,
         borderWidth: 2,
-
+        headerFormat: `{point.key}</br>`,
+        pointFormat: `<b>{point.y}</b> message on {point.x:%e %b}`,
         style: {
           color: "#FFFFFF",
         },
@@ -90,7 +61,6 @@ export const engagementHelper = {
 
       legend: {
         backgroundColor: "#0A0A0D",
-        text: "general",
         itemStyle: {
           color: "#FFFFFF84",
           fontSize: "11px",
@@ -100,6 +70,7 @@ export const engagementHelper = {
 
       series: [
         {
+          name: `general`,
           marker: {
             enabled: false,
           },

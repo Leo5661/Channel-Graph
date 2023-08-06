@@ -10,7 +10,11 @@ function EngagementMessagesOverTime() {
     Channels,
   );
 
-  return <HighchartsReact highcharts={Highcharts} options={options} />;
+  return (
+    <div className="p-8 mt-8 drop-shadow-md">
+      <HighchartsReact highcharts={Highcharts} options={options} />
+    </div>
+  );
 }
 
 export default EngagementMessagesOverTime;

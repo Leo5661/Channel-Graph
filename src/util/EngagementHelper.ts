@@ -37,10 +37,15 @@ export const engagementHelper = {
       yAxis: {
         type: "linear",
         title: "",
-        lineColor: "#BFBFBF",
+        tickColor: "#BFBFBF",
         tickWidth: 1,
         min: 0,
         gridLineWidth: 0,
+        labels: {
+          style: {
+            color: "#BFBFBF",
+          },
+        },
       },
 
       xAxis: {
@@ -49,6 +54,8 @@ export const engagementHelper = {
           day: "%e. %b",
         },
         tickInterval: 24 * 3600 * 1000,
+        tickColor: "#BFBFBF",
+        lineColor: "#BFBFBF",
         plotLines: [
           {
             color: "gray",
@@ -57,6 +64,11 @@ export const engagementHelper = {
             width: 2,
           },
         ],
+        labels: {
+          style: {
+            color: "#BFBFBF",
+          },
+        },
       },
 
       legend: {

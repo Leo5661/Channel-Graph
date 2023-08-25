@@ -1,6 +1,6 @@
 # Graph using Highcharts React.
 
-* To see the demo visit [Demo App](https://channel-graph.vercel.app/)
+![Demo](https://github.com/Leo5661/Channel-Graph/blob/main/src/assets/clip.gif)
 
 ## Local setup
 Run these commands in the project dir.
